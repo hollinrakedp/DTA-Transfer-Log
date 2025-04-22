@@ -1,0 +1,78 @@
+﻿<Window x:Class="DTATransferLog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:DTATransferLog"
+        mc:Ignorable="d"
+        Title="DTA Transfer Log Creator" Height="325" Width="540" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF969696" Offset="1"/>
+                <GradientStop Color="#FF6D91FF" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <GroupBox Header="General" Margin="10,5,285,175" FontWeight="Bold">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Name="lbl_Date" Content="Date" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold"/>
+                <DatePicker Grid.Row="0" Grid.Column="1" Name="dtpkr_TransferDate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" AutomationProperties.HelpText="Select the date of the transfer" Margin="3">
+                    <DatePicker.BlackoutDates/>
+                </DatePicker>
+                <Label Grid.Row="1" Grid.Column="0" Name="lbl_Username" Content="User" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="txtbx_Username" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" IsEnabled="False" Height="22" Margin="3" />
+                <Label Grid.Row="2" Grid.Column="0" Name="lbl_Computername" Content="Computer" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="txtbx_Computername" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" IsEnabled="False" Height="22" Margin="3" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Data" Margin="245,5,10,125" FontWeight="Bold">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Name="lbl_MediaType" Grid.Row="0" Grid.Column="0" Content="Media Type" HorizontalAlignment="Right" FontWeight="Bold" />
+                <ComboBox Grid.Row="0" Grid.Column="1" Name="cmbx_MediaType" HorizontalAlignment="Left" Width="165" IsEditable="True" FontWeight="Bold" Margin="3" />
+                <Label Name="lbl_MediaID" Grid.Row="1" Grid.Column="0" Content="Media ID" HorizontalAlignment="Right" FontWeight="Bold" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="cmbx_MediaID" HorizontalAlignment="Left" Width="165" IsEditable="True" FontWeight="Bold" Margin="3" />
+                <Label Name="lbl_Source" Grid.Row="2" Grid.Column="0" Content="Source" HorizontalAlignment="Right" FontWeight="Bold" />
+                <ComboBox Grid.Row="2" Grid.Column="1" Name="cmbx_Source" HorizontalAlignment="Left" Width="165" IsEditable="True" FontWeight="Bold" Margin="3" />
+                <Label Name="lbl_Destination" Grid.Row="3" Grid.Column="0" Content="Destination" HorizontalAlignment="Right" FontWeight="Bold" />
+                <ComboBox Grid.Row="3" Grid.Column="1" Name="cmbx_Destination" HorizontalAlignment="Left" Width="165" IsEditable="True" FontWeight="Bold" Margin="3" />
+                <Label Name="lbl_TransferType" Grid.Row="4" Grid.Column="0" Content="Transfer Type" HorizontalAlignment="Right" FontWeight="Bold" />
+                <ComboBox Grid.Row="4" Grid.Column="1" Name="cmbx_TransferType" HorizontalAlignment="Left" Width="165" IsEditable="False" FontWeight="Bold" Margin="3" />
+            </Grid>
+        </GroupBox>
+
+        <Label Name="lbl_MissingRequired"  Content="Complete Required Field(s)" HorizontalAlignment="Left" Margin="30,115,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Foreground="#FFBB0000" Visibility="Hidden"/>
+        <Label Name="lbl_NetworkNotMatchRequired"  Content="*Networks must be different*" HorizontalAlignment="Left" Margin="40,135,0,0" VerticalAlignment="Top" FontSize="12" Foreground="#FFBB0000" Visibility="Hidden"/>
+        <Label Name="lbl_DataTransferFolderExistsRequired"  Content="***The folder does not exist***" HorizontalAlignment="Left" Margin="130,158,0,0" VerticalAlignment="Top" FontSize="12" Foreground="Red" Visibility="Hidden"/>
+
+        <Label Name="lbl_DataTransferFolder" Content="Data Transfer Folder" HorizontalAlignment="Left" Margin="5,158,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtbx_DataTransferFolder" HorizontalAlignment="Left" Margin="10,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="420" Height="21"/>
+        <Button Name="btn_DataTransferFolder" Content="Select Folder" HorizontalAlignment="Left" Margin="440,180,0,0" VerticalAlignment="Top" Width="76" Height="19"/>
+
+        <Label Content="Log Output Folder" HorizontalAlignment="Left" Margin="5,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtbx_LogOutputFolder" HorizontalAlignment="Left" Margin="10,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="420" Height="21" IsEnabled="False"/>
+        <Button Name="btn_LogOutputFolder" Content="Select Folder" HorizontalAlignment="Left" Margin="440,225,0,0" VerticalAlignment="Top" Width="76" Height="19" Visibility="Hidden" />
+        <Button Name="btn_Submit" Content="Generate Transfer Log" HorizontalAlignment="Left" Margin="395,258,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
